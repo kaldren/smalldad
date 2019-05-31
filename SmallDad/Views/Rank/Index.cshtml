@@ -1,0 +1,10 @@
+﻿@model List<SmallDad.Models.Rank>
+
+@{
+    ViewData["Title"] = "Ranks";
+
+    @foreach (var rank in @Model)
+    {
+        <p>@rank.Title</p>
+    }
+}
