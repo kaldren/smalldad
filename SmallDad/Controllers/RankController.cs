@@ -15,11 +15,27 @@ namespace SmallDad.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+
+        public IActionResult Index(int? id)
         {
             var listRanks = _context.Ranks.ToList();
 
             return View(listRanks);
+        }
+
+        [HttpGet("/rank/{id}")]
+        public IActionResult GetRank(int id, int? vote)
+        {
+            var rank = _context.Ranks.Where(x => x.Id == id).SingleOrDefault();
+
+            if (vote.HasValue)
+            {
+                var currentVote = vote == 1 ? 1 : -1;
+                rank.Rating += currentVote;
+                _context.SaveChanges();
+            }
+
+            return View(rank);
         }
     }
 }
