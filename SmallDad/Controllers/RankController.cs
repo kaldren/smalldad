@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmallDad.Data;
 using SmallDad.Dto;
@@ -10,13 +14,16 @@ using SmallDad.Models;
 
 namespace SmallDad.Controllers
 {
+    [Authorize]
     public class RankController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public RankController(ApplicationDbContext context)
+        public RankController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         public IActionResult Index()
@@ -59,12 +66,20 @@ namespace SmallDad.Controllers
 
         [HttpPost("/Rank/Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreatePost([Bind("Title,Description")] RankDto rankDto)
+        public IActionResult CreatePost([Bind("Title,Description")] RankDto rankDto, IFormFile coverImage)
         {
+            var filePath = Path.Combine(_env.ContentRootPath, AppConstants.CoverImgPath, coverImage.FileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                coverImage.CopyToAsync(stream);
+            }
+
             var rank = new Rank
             {
                 Title = rankDto.Title,
-                Description = rankDto.Description
+                Description = rankDto.Description,
+                CoverImgPath = AppConstants.CoverImgPath
             };
 
             _context.Ranks.Add(rank);

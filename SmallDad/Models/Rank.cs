@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmallDad.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,5 +22,6 @@ namespace SmallDad.Models
         public int NumVotes { get; set; } = 0;
         public int Rating { get; set; } = 0;
         public RatingTypes Verbal { get; set; } = RatingTypes.Normal;
+        public string CoverImgPath { get; set; }
     }
 }
