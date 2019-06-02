@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SmallDad.Data;
+using SmallDad.Dto;
 using SmallDad.Misc;
 using SmallDad.Models;
 
@@ -58,8 +59,17 @@ namespace SmallDad.Controllers
 
         [HttpPost("/Rank/Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreatePost()
+        public IActionResult CreatePost([Bind("Title,Description")] RankDto rankDto)
         {
+            var rank = new Rank
+            {
+                Title = rankDto.Title,
+                Description = rankDto.Description
+            };
+
+            _context.Ranks.Add(rank);
+            _context.SaveChanges();
+
             return View();
         }
     }

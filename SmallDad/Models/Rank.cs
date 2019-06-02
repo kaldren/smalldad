@@ -18,8 +18,8 @@ namespace SmallDad.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int NumVotes { get; set; }
-        public int Rating { get; set; }
-        public RatingTypes Verbal { get; set; }
+        public int NumVotes { get; set; } = 0;
+        public int Rating { get; set; } = 0;
+        public RatingTypes Verbal { get; set; } = RatingTypes.Normal;
     }
 }
