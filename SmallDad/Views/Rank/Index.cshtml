@@ -5,6 +5,6 @@
 
     @foreach (var rank in @Model)
     {
-        <p>@rank.Title</p>
+        <p><a asp-controller="Rank" asp-action="GetRank" asp-route-id="@rank.Id">@rank.Title</a></p>
     }
 }
