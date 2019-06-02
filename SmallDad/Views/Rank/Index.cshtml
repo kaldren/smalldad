@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Ranks";
 
+    <p><a class="btn btn-primary" asp-controller="Rank" asp-action="Create">Create new Rank</a></p>
+
     @foreach (var rank in @Model)
     {
         <p><a asp-controller="Rank" asp-action="GetRank" asp-route-id="@rank.Id">@rank.Title</a></p>

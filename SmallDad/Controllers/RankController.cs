@@ -49,5 +49,18 @@ namespace SmallDad.Controllers
 
             return View(rank);
         }
+
+        [HttpGet("/Rank/Create")]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost("/Rank/Create")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreatePost()
+        {
+            return View();
+        }
     }
 }
