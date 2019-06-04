@@ -16,5 +16,6 @@ namespace SmallDad.Misc
         #endregion
 
         public const string CoverImgPath = @"wwwroot\images\";
+        public const string CoverImgPathPublic = @"\images\";
     }
 }

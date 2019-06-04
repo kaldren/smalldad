@@ -66,20 +66,23 @@ namespace SmallDad.Controllers
 
         [HttpPost("/Rank/Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreatePost([Bind("Title,Description")] RankDto rankDto, IFormFile coverImage)
+        public IActionResult CreatePost([Bind("Title,Description,CoverImage")] RankDto rankDto)
         {
-            var filePath = Path.Combine(_env.ContentRootPath, AppConstants.CoverImgPath, coverImage.FileName);
+            var imageExtension = Path.GetExtension(rankDto.CoverImage.FileName);
+            var imageName = Guid.NewGuid().ToString() + imageExtension;
+
+            var filePath = Path.Combine(_env.ContentRootPath, AppConstants.CoverImgPath, imageName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                coverImage.CopyToAsync(stream);
+                rankDto.CoverImage.CopyToAsync(stream);
             }
 
             var rank = new Rank
             {
                 Title = rankDto.Title,
                 Description = rankDto.Description,
-                CoverImgPath = AppConstants.CoverImgPath
+                CoverImgPath = AppConstants.CoverImgPathPublic + imageName
             };
 
             _context.Ranks.Add(rank);
