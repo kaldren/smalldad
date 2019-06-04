@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmallDad.Data;
 using SmallDad.Dto;
 using SmallDad.Misc;
@@ -34,9 +35,9 @@ namespace SmallDad.Controllers
         }
 
         [HttpGet("/Rank/{id:int}")]
-        public IActionResult GetRank(int id, int? vote)
+        public async Task<IActionResult> GetRank(int id, int? vote)
         {
-            var rank = _context.Ranks.Where(x => x.Id == id).SingleOrDefault();
+            var rank = await _context.Ranks.Where(x => x.Id == id).SingleOrDefaultAsync();
 
             if (vote.HasValue)
             {
@@ -66,7 +67,7 @@ namespace SmallDad.Controllers
 
         [HttpPost("/Rank/Create")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreatePost([Bind("Title,Description,CoverImage")] RankDto rankDto)
+        public async Task<IActionResult> CreatePost([Bind("Title,Description,CoverImage")] RankDto rankDto)
         {
             var imageExtension = Path.GetExtension(rankDto.CoverImage.FileName);
             var imageName = Guid.NewGuid().ToString() + imageExtension;
@@ -75,7 +76,7 @@ namespace SmallDad.Controllers
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                rankDto.CoverImage.CopyToAsync(stream);
+                await rankDto.CoverImage.CopyToAsync(stream);
             }
 
             var rank = new Rank
@@ -85,8 +86,8 @@ namespace SmallDad.Controllers
                 CoverImgPath = AppConstants.CoverImgPathPublic + imageName
             };
 
-            _context.Ranks.Add(rank);
-            _context.SaveChanges();
+            await _context.Ranks.AddAsync(rank);
+            await _context.SaveChangesAsync();
 
             return View();
         }
