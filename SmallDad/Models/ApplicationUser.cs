@@ -9,5 +9,6 @@ namespace SmallDad.Models
     public class ApplicationUser : IdentityUser
     {
         public string Biography { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
