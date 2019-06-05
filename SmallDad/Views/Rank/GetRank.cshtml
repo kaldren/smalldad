@@ -1,14 +1,23 @@
 ﻿@model SmallDad.Models.Rank
 
-<div class="card" style="width: 18rem;">
-    <img src="@Model.CoverImgPath" class="card-img-top" alt="@Model.Title">
-    <div class="card-body">
-        <h5 class="card-title">@Model.Title</h5>
-        <p class="card-text">@Model.Description</p>
-        <p class="card-text">Num votes: @Model.NumVotes</p>
-        <p class="card-text">Rating: @Model.Rating</p>
-        <p class="card-text">Current status: @Model.Verbal</p>
-        <a asp-route-vote="1" class="btn btn-primary">+</a>
-        <a asp-route-vote="-1" class="btn btn-primary">-</a>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-lg-6">
+            <div class="card" style="width: 18rem;">
+                <img src="@Model.CoverImgPath" class="card-img-top" alt="@Model.Title">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">Num votes: @Model.NumVotes</p>
+                    <p class="card-text">Rating: @Model.Rating</p>
+                    <p class="card-text">Current status: @Model.Verbal</p>
+                    <a asp-route-vote="1" class="btn btn-primary">+</a>
+                    <a asp-route-vote="-1" class="btn btn-primary">-</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-6">
+            List of comments
+        </div>
     </div>
 </div>
