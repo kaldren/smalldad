@@ -11,7 +11,7 @@ namespace SmallDad.Models
         public string Content { get; set; }
         public string AuthorId { get; set; }
         public ApplicationUser Author { get; set; }
-        public int Rankid { get; set; }
+        public int RankId { get; set; }
         public Rank Rank { get; set; }
     }
 }
