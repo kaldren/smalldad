@@ -23,5 +23,6 @@ namespace SmallDad.Models
         public int Rating { get; set; } = 0;
         public RatingTypes Verbal { get; set; } = RatingTypes.Normal;
         public string CoverImgPath { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
