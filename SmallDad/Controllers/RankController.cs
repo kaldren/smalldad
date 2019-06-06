@@ -40,6 +40,7 @@ namespace SmallDad.Controllers
             var rank = await _context.Ranks
                 .Where(x => x.Id == id)
                 .Include(x => x.Comments)
+                .ThenInclude(x => x.Author)
                 .SingleOrDefaultAsync();
 
             if (vote.HasValue)

@@ -14,6 +14,16 @@ namespace SmallDad.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(p => p.Author)
+                .WithMany(b => b.Comments)
+                .HasForeignKey(p => p.AuthorId);
+        }
+
         public DbSet<Rank> Ranks { get; set; }
     }
 }

@@ -19,7 +19,7 @@
         <div class="col-xs-12 col-lg-6">
             @foreach (var comment in Model.Comments)
             {
-                <p>@comment.Content <a href="javascript:void(0)">@comment.AuthorId</a></p>
+                <p>@comment.Content <a href="javascript:void(0)">@comment.Author.UserName</a></p>
             }
         </div>
     </div>
