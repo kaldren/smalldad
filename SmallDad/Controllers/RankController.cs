@@ -37,7 +37,10 @@ namespace SmallDad.Controllers
         [HttpGet("/Rank/{id:int}")]
         public async Task<IActionResult> GetRank(int id, int? vote)
         {
-            var rank = await _context.Ranks.Where(x => x.Id == id).SingleOrDefaultAsync();
+            var rank = await _context.Ranks
+                .Where(x => x.Id == id)
+                .Include(x => x.Comments)
+                .SingleOrDefaultAsync();
 
             if (vote.HasValue)
             {

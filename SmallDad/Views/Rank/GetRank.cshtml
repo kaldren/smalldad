@@ -17,7 +17,10 @@
             </div>
         </div>
         <div class="col-xs-12 col-lg-6">
-            @Model.Comments.Count
+            @foreach (var comment in Model.Comments)
+            {
+                <p>@comment.Content <a href="javascript:void(0)">@comment.AuthorId</a></p>
+            }
         </div>
     </div>
 </div>
