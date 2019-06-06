@@ -31,5 +31,15 @@ namespace SmallDad.Controllers
 
             return View(profile);
         }
+
+        [HttpGet("/Profile/{username:alpha}")]
+        public async Task<IActionResult> GetProfileByUserName(string username)
+        {
+            var profile = await _context.Users
+                            .Where(x => x.UserName == username)
+                            .SingleOrDefaultAsync();
+
+            return View(profile);
+        }
     }
 }
