@@ -10,20 +10,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SmallDad.Models;
+using SmallDad.Misc;
+using System.Security.Claims;
 
 namespace SmallDad.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
+        private readonly MyUserManager _myUserManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public IndexModel(
+            MyUserManager myUserManager,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender)
         {
+            _myUserManager = myUserManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -52,7 +57,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             public string Biography { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()   
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -65,7 +70,8 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var biography = await _userManager.Users
                             .Where(x => x.UserName == "kdrenski")
-                            .Select(x => x.Biography).SingleOrDefaultAsync();
+                            .Select(x => x.Biography)
+                            .SingleOrDefaultAsync();
 
             Username = userName;
 
@@ -114,6 +120,16 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                     var userId = await _userManager.GetUserIdAsync(user);
                     throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
                 }
+            }
+
+            var biography = await _userManager.Users
+                            .Where(x => x.UserName == "kdrenski")
+                            .Select(x => x.Biography)
+                            .SingleOrDefaultAsync();
+
+            if (Input.Biography != biography)
+            {
+                await _myUserManager.UpdateBiography(Input.Biography);
             }
 
             await _signInManager.RefreshSignInAsync(user);
