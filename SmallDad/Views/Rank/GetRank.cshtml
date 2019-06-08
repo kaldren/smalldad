@@ -20,7 +20,7 @@
             @if (Model.Comments.Count == 0)
             {
                 <h3>No one commented on this yet.</h3>
-                <p><a class="btn btn-primary" href="/Comment/Create">Leave a comment</a></p>
+                <p><a class="btn btn-primary" href="/Comment/@Model.Id">Leave a comment</a></p>
             }
 
             @foreach (var comment in Model.Comments)

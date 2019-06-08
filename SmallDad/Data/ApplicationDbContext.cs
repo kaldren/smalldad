@@ -30,5 +30,6 @@ namespace SmallDad.Data
         }
 
         public DbSet<Rank> Ranks { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

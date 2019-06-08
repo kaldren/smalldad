@@ -35,5 +35,10 @@ namespace SmallDad.Misc
 
             return user.Biography;
         }
+
+        public async Task<ApplicationUser> GetCurrentUser()
+        {
+            return await GetUserAsync(_httpContext.HttpContext.User);
+        }
     }
 }
