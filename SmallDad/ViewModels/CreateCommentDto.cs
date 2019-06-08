@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmallDad.Dto
+namespace SmallDad.ViewModels
 {
-    public class CommentCreatedDto
+    public class CreateCommentDto
     {
+        public string Content { get; set; }
         public int RankId { get; set; }
     }
 }
