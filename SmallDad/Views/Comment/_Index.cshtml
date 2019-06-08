@@ -6,9 +6,9 @@
         <div>
             <label asp-for="Content" class="control-label">Leave a comment below...</label>
             <textarea cols="50" rows="5" asp-for="Content" class="form-control"></textarea>
+            <input type="hidden" asp-for="Id" />
         </div>
         <button type="submit" class="btn btn-primary">Comment</button>
-        <input type="hidden" asp-for="Id" /><br />
         <span asp-validation-for="Content" class="text-danger"></span>
     </form>
 </div>
