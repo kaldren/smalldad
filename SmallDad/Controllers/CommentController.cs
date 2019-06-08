@@ -25,7 +25,7 @@ namespace SmallDad.Controllers
         }
 
         [HttpPost("/Comment/{id:int}")]
-        public async Task<IActionResult> Create(int id, string content)
+        public async Task<IActionResult> Create(CreateCommentViewModel createCommentViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -35,14 +35,14 @@ namespace SmallDad.Controllers
                 {
                     Author = currentUser,
                     AuthorId = currentUser.Id,
-                    Content = content,
-                    RankId = id
+                    Content = createCommentViewModel.Content,
+                    RankId = createCommentViewModel.Id
                 };
 
                 await _context.Comments.AddAsync(commentToDb);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("GetRank", "Rank", new { id });
+                return RedirectToAction("GetRank", "Rank", new { createCommentViewModel.Id });
             }
 
             return View();
