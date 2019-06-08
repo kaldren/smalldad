@@ -23,6 +23,8 @@
             }
             <p><a class="btn btn-primary" href="/Comment/@Model.Id">Leave a comment</a></p>
 
+            @await Html.PartialAsync("~/Views/Comment/Index.cshtml", new SmallDad.Dto.CreateCommentDto() { RankId = Model.Id })
+
             @foreach (var comment in Model.Comments)
             {
                 <p>@comment.Content <a href="/Profile/@comment.Author.UserName">@comment.Author.UserName</a></p>

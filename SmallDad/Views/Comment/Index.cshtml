@@ -1,6 +1,7 @@
 ﻿@model SmallDad.Dto.CreateCommentDto
 
-<form asp-action="post">
+Leave a comment below...
+<form action="/Comment/@Model.RankId" method="post">
     <div><textarea cols="50" rows="5" asp-for="@Model.Content"></textarea></div>
     <input type="submit" value="Comment" />
     <input type="hidden" value="@Model.RankId" />
