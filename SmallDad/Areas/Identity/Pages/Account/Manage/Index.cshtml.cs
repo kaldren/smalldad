@@ -100,8 +100,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var email = await _userManager.GetEmailAsync(user);
-            if (Input.Email != email)
+            if (Input.Email != user.Email)
             {
                 var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
                 if (!setEmailResult.Succeeded)
@@ -111,8 +110,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (Input.PhoneNumber != user.PhoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
@@ -122,12 +120,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            var biography = await _userManager.Users
-                            .Where(x => x.UserName == "kdrenski")
-                            .Select(x => x.Biography)
-                            .SingleOrDefaultAsync();
-
-            if (Input.Biography != biography)
+            if (Input.Biography != user.Biography)
             {
                 await _myUserManager.UpdateBiography(Input.Biography);
             }
