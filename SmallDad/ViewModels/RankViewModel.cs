@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmallDad.ViewModels
 {
-    public class RankDto
+    public class RankViewModel
     {
         public string Title { get; set; }
         public string Description { get; set; }

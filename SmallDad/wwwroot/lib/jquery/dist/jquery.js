@@ -1111,7 +1111,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 	// Check if getElementsByTagName("*") returns only elements
 	support.getElementsByTagName = assert(function( el ) {
-		el.appendChild( document.createComment("") );
+		el.appendChild( document.CreateCommentViewModel("") );
 		return !el.getElementsByTagName("*").length;
 	});
 

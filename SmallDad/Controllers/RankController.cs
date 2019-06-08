@@ -71,22 +71,22 @@ namespace SmallDad.Controllers
 
         [HttpPost("/Rank/Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePost([Bind("Title,Description,CoverImage")] RankDto rankDto)
+        public async Task<IActionResult> CreatePost([Bind("Title,Description,CoverImage")] RankViewModel RankViewModel)
         {
-            var imageExtension = Path.GetExtension(rankDto.CoverImage.FileName);
+            var imageExtension = Path.GetExtension(RankViewModel.CoverImage.FileName);
             var imageName = Guid.NewGuid().ToString() + imageExtension;
 
             var filePath = Path.Combine(_env.ContentRootPath, AppConstants.CoverImgPath, imageName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                await rankDto.CoverImage.CopyToAsync(stream);
+                await RankViewModel.CoverImage.CopyToAsync(stream);
             }
 
             var rank = new Rank
             {
-                Title = rankDto.Title,
-                Description = rankDto.Description,
+                Title = RankViewModel.Title,
+                Description = RankViewModel.Description,
                 CoverImgPath = AppConstants.CoverImgPathPublic + imageName
             };
 
