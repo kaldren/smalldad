@@ -53,6 +53,12 @@ namespace SmallDad.Controllers
                 await _context.Comments.AddAsync(commentToDb);
                 await _context.SaveChangesAsync();
 
+                var commentCreatedDto = new CommentCreatedDto
+                {
+                    RankId = id
+                };
+
+                return View(commentCreatedDto);
             }
 
             return View();

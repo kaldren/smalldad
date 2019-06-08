@@ -1,7 +1,4 @@
-﻿@model SmallDad.Dto.CreateCommentDto
+﻿@model SmallDad.Dto.CommentCreatedDto
 
-<form asp-action="post">
-    <div><textarea cols="50" rows="5" asp-for="@Model.Content"></textarea></div>
-    <input type="submit" value="Comment" />
-    <input type="hidden" value="@Model.RankId" />
-</form>
+Comment was created!
+<a href="/Rank/@Model.RankId">Go back!</a>
