@@ -7,6 +7,9 @@ namespace SmallDad.ViewModels.Comment
 {
     public class CreateCommentViewModel
     {
+        /// <summary>
+        /// Content of the comment
+        /// </summary>
         public string Content { get; set; }
         
         /// <summary>
