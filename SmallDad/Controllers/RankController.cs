@@ -12,6 +12,7 @@ using SmallDad.Data;
 using SmallDad.ViewModels.Comment;
 using SmallDad.Misc;
 using SmallDad.Models;
+using SmallDad.ViewModels.Rank;
 
 namespace SmallDad.Controllers
 {
