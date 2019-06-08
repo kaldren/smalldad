@@ -58,7 +58,7 @@ namespace SmallDad.Controllers
                     RankId = id
                 };
 
-                return View(commentCreatedDto);
+                return RedirectToAction("GetRank", "Rank", new { id });
             }
 
             return View();
