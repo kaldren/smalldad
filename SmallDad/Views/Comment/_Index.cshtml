@@ -2,13 +2,14 @@
 
 <div class="form-group">
     <form asp-controller="Comment" asp-action="Create" asp-route-id="@Model.Id" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div>
             <label asp-for="Content" class="control-label">Leave a comment below...</label>
             <textarea cols="50" rows="5" asp-for="Content" class="form-control"></textarea>
+            <span asp-validation-for="Content" class="text-danger"></span>
             <input type="hidden" asp-for="Id" />
         </div>
-        <button type="submit" class="btn btn-primary">Comment</button>
-        <span asp-validation-for="Content" class="text-danger"></span>
+        <div>
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </div>
     </form>
 </div>
