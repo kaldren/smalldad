@@ -5,7 +5,7 @@ Leave a comment below...
     <div>
         <textarea cols="50" rows="5" asp-for="@Model.Content" class="form-control"></textarea>
     </div>
-    <input type="submit" value="Comment" />
+    <button type="submit">Comment</button>
     <input type="hidden" value="@Model.Id" />
     <span asp-validation-for="@Model.Content" class="text-danger"></span>
 </form>
