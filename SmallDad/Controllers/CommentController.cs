@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmallDad.Data;
-using SmallDad.ViewModels;
+using SmallDad.ViewModels.Comment;
 using SmallDad.Misc;
 using SmallDad.Models;
 using System;
