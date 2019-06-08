@@ -42,10 +42,9 @@ namespace SmallDad.Controllers
                 await _context.Comments.AddAsync(commentToDb);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("GetRank", "Rank", new { createCommentViewModel.Id });
             }
 
-            return View();
+            return RedirectToAction("GetRank", "Rank", new { createCommentViewModel.Id });
         }
 
     }

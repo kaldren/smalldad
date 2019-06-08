@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace SmallDad.ViewModels.Comment
         /// <summary>
         /// Content of the comment
         /// </summary>
+
+        [Required]
         public string Content { get; set; }
         
         /// <summary>
