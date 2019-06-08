@@ -22,19 +22,6 @@ namespace SmallDad.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("/Comment/{id:int}")]
-        public async Task<IActionResult> Index(int id)
-        {
-            var rankObj = await _context.Ranks.FirstOrDefaultAsync(x => x.Id == id);
-            var commentDto = new CreateCommentViewModel
-            {
-                Content = string.Empty,
-                RankId = id
-            };
-
-            return View(commentDto);
-        }
-
         [HttpPost("/Comment/{id:int}")]
         public async Task<IActionResult> Create(int id, string content)
         {
