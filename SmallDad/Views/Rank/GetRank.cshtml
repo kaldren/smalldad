@@ -22,7 +22,7 @@
                 <h3>No one commented on this yet.</h3>
             }
 
-            @await Html.PartialAsync("~/Views/Comment/_Index.cshtml", new SmallDad.ViewModels.CreateCommentDto() { RankId = Model.Id })
+            @await Html.PartialAsync("~/Views/Comment/_Index.cshtml", new SmallDad.ViewModels.CreateComment() { RankId = Model.Id })
 
             @foreach (var comment in Model.Comments)
             {

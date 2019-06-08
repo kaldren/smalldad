@@ -26,7 +26,7 @@ namespace SmallDad.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var rankObj = await _context.Ranks.FirstOrDefaultAsync(x => x.Id == id);
-            var commentDto = new CreateCommentDto
+            var commentDto = new CreateComment
             {
                 Content = string.Empty,
                 RankId = id
@@ -53,7 +53,7 @@ namespace SmallDad.Controllers
                 await _context.Comments.AddAsync(commentToDb);
                 await _context.SaveChangesAsync();
 
-                var CommentCreatedViewModel = new CommentCreatedViewModel
+                var CommentCreated = new CommentCreated
                 {
                     RankId = id
                 };

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace SmallDad.ViewModels
 {
-    public class CreateCommentDto
+    public class CommentCreated
     {
-        public string Content { get; set; }
         public int RankId { get; set; }
     }
 }
