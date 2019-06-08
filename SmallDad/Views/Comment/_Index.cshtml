@@ -1,11 +1,14 @@
 ﻿@model SmallDad.ViewModels.Comment.CreateCommentViewModel
 
 Leave a comment below...
-<form asp-controller="Comment" asp-action="Create" asp-route-id="@Model.Id" method="post">
-    <div>
-        <textarea cols="50" rows="5" asp-for="@Model.Content" class="form-control"></textarea>
-    </div>
-    <button type="submit">Comment</button>
-    <input type="hidden" value="@Model.Id" />
-    <span asp-validation-for="@Model.Content" class="text-danger"></span>
-</form>
+<div class="form-group">
+    <form asp-controller="Comment" asp-action="Create" asp-route-id="@Model.Id" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <textarea cols="50" rows="5" asp-for="@Model.Content" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Comment</button>
+        <input type="hidden" asp-for="@Model.Id" /><br />
+        <span asp-validation-for="@Model.Content" class="text-danger"></span>
+    </form>
+</div>
