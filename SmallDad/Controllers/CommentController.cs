@@ -8,9 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SmallDad.Controllers
 {
+    [Authorize]
     public class CommentController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -39,11 +41,6 @@ namespace SmallDad.Controllers
 
                 await _context.Comments.AddAsync(commentToDb);
                 await _context.SaveChangesAsync();
-
-                var CommentCreatedViewModel = new CommentCreatedViewModel
-                {
-                    RankId = id
-                };
 
                 return RedirectToAction("GetRank", "Rank", new { id });
             }
