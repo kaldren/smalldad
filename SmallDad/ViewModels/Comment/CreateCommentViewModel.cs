@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmallDad.Misc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,8 +13,11 @@ namespace SmallDad.ViewModels.Comment
         /// Content of the comment
         /// </summary>
 
+        // TODO: Use Fluet Validation
         [Required(ErrorMessage = "Please write a comment.")]
-        [StringLength(60, MinimumLength = 3, ErrorMessage = "Your comment should be between 3 and 60 characters.")]
+        [StringLength(AppConstants.CommentMaxLength, 
+            MinimumLength = AppConstants.CommentMinLength, 
+            ErrorMessage = "Your comment should be between 3 and 60 characters.")]
         public string Content { get; set; }
         
         /// <summary>

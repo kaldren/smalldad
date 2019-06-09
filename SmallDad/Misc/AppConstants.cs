@@ -15,7 +15,14 @@ namespace SmallDad.Misc
         public const int RatingBazooka = 20;
         #endregion
 
+        #region ImagePath
         public const string CoverImgPath = @"wwwroot\images\";
         public const string CoverImgPathPublic = @"\images\";
+        #endregion ImagePath
+
+        #region Comments
+        public const int CommentMinLength = 3;
+        public const int CommentMaxLength = 500;
+        #endregion Comments
     }
 }
