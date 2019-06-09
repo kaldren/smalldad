@@ -23,10 +23,12 @@ namespace SmallDad.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            #region Comment
             modelBuilder.Entity<Comment>()
                 .HasOne(p => p.Author)
                 .WithMany(b => b.Comments)
                 .HasForeignKey(p => p.AuthorId);
+            #endregion Comment
         }
 
         public DbSet<Rank> Ranks { get; set; }
