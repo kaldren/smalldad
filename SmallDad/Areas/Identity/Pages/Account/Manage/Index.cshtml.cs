@@ -50,6 +50,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
+        [Bind("Email,PhoneNumber,Biography,ProfilePhoto")]
         public class InputModel
         {
             [Required]
@@ -94,7 +95,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile profilePhoto)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -132,16 +133,16 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 await _myUserManager.UpdateBiography(Input.Biography);
             }
 
-            if (profilePhoto != null && profilePhoto.Length > 0 && profilePhoto.ContentType == "image/jpeg")
+            if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
             {
-                var imageExtension = Path.GetExtension(profilePhoto.FileName);
+                var imageExtension = Path.GetExtension(Input.ProfilePhoto.FileName);
                 var imageName = Guid.NewGuid().ToString() + imageExtension;
 
                 var filePath = Path.Combine(_env.ContentRootPath, AppConstants.ProfilePhotoImgPath, imageName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await profilePhoto.CopyToAsync(stream);
+                    await Input.ProfilePhoto.CopyToAsync(stream);
                 }
 
                 user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + imageName;
