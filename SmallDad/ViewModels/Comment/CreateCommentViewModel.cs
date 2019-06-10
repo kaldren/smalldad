@@ -16,7 +16,7 @@ namespace SmallDad.ViewModels.Comment
         [StringLength(
             AppConstants.CommentMaxLength, 
             MinimumLength = AppConstants.CommentMinLength, 
-            ErrorMessage = "Your comment should be between 3 and 60 characters.")]
+            ErrorMessage = "Your comment should be between {2} and {1} characters.")]
         public string Content { get; set; }
         
         /// <summary>
