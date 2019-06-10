@@ -77,7 +77,7 @@ namespace SmallDad.Controllers
             var imageExtension = Path.GetExtension(RankViewModel.CoverImage.FileName);
             var imageName = Guid.NewGuid().ToString() + imageExtension;
 
-            var filePath = Path.Combine(_env.ContentRootPath, AppConstants.CoverImgPath, imageName);
+            var filePath = Path.Combine(_env.ContentRootPath, AppConstants.RankCoverImgPath, imageName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
@@ -88,7 +88,7 @@ namespace SmallDad.Controllers
             {
                 Title = RankViewModel.Title,
                 Description = RankViewModel.Description,
-                CoverImgPath = AppConstants.CoverImgPathPublic + imageName
+                CoverImgPath = AppConstants.RankCoverImgPathPublic + imageName
             };
 
             await _context.Ranks.AddAsync(rank);

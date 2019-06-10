@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using SmallDad.Models;
 using SmallDad.Misc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace SmallDad.Areas.Identity.Pages.Account.Manage
 {
@@ -21,17 +24,20 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IHostingEnvironment _env;
 
         public IndexModel(
             MyUserManager myUserManager,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IHostingEnvironment env)
         {
             _myUserManager = myUserManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _env = env;
         }
 
         public string Username { get; set; }
@@ -55,6 +61,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             public string Biography { get; set; }
+            public IFormFile ProfilePhoto { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync()   
@@ -123,6 +130,19 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             if (Input.Biography != user.Biography)
             {
                 await _myUserManager.UpdateBiography(Input.Biography);
+            }
+
+            if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
+            {
+                var imageExtension = Path.GetExtension(Input.ProfilePhoto.FileName);
+                var imageName = Guid.NewGuid().ToString() + imageExtension;
+
+                var filePath = Path.Combine(_env.ContentRootPath, AppConstants.RankCoverImgPath, imageName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Input.ProfilePhoto.CopyToAsync(stream);
+                }
             }
 
             await _signInManager.RefreshSignInAsync(user);
