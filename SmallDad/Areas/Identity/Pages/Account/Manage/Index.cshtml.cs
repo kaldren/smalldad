@@ -94,7 +94,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile profilePhoto)
         {
             if (!ModelState.IsValid)
             {
@@ -132,17 +132,19 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 await _myUserManager.UpdateBiography(Input.Biography);
             }
 
-            if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
+            if (profilePhoto != null && profilePhoto.Length > 0 && profilePhoto.ContentType == "image/jpeg")
             {
-                var imageExtension = Path.GetExtension(Input.ProfilePhoto.FileName);
+                var imageExtension = Path.GetExtension(profilePhoto.FileName);
                 var imageName = Guid.NewGuid().ToString() + imageExtension;
 
-                var filePath = Path.Combine(_env.ContentRootPath, AppConstants.RankCoverImgPath, imageName);
+                var filePath = Path.Combine(_env.ContentRootPath, AppConstants.ProfilePhotoImgPath, imageName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await Input.ProfilePhoto.CopyToAsync(stream);
+                    await profilePhoto.CopyToAsync(stream);
                 }
+
+                user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + imageName;
             }
 
             await _signInManager.RefreshSignInAsync(user);
