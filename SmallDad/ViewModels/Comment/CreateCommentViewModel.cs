@@ -12,10 +12,9 @@ namespace SmallDad.ViewModels.Comment
         /// <summary>
         /// Content of the comment
         /// </summary>
-
-        // TODO: Use Fluet Validation
         [Required(ErrorMessage = "Please write a comment.")]
-        [StringLength(AppConstants.CommentMaxLength, 
+        [StringLength(
+            AppConstants.CommentMaxLength, 
             MinimumLength = AppConstants.CommentMinLength, 
             ErrorMessage = "Your comment should be between 3 and 60 characters.")]
         public string Content { get; set; }
