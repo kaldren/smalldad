@@ -137,17 +137,9 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             {
                 if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
                 {
-                    var imageExtension = Path.GetExtension(Input.ProfilePhoto.FileName);
-                    var imageName = Guid.NewGuid().ToString() + imageExtension;
-
-                    var filePath = Path.Combine(_env.ContentRootPath, AppConstants.ProfilePhotoImgPath, imageName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await Input.ProfilePhoto.CopyToAsync(stream);
-                    }
-
-                    user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + imageName;
+                    var photoUploader = new PhotoUploader(_env);
+                    var isFileUploaded = await photoUploader.Upload(Input.ProfilePhoto, PhotoType.ProfilePhoto);
+                    user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + photoUploader.ImageName;
                 }
             }
 
