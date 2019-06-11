@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmallDad.Data;
+using SmallDad.ViewModels.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,16 @@ namespace SmallDad.Controllers
                             .Where(x => x.Id == id.ToString())
                             .SingleOrDefaultAsync();
 
-            return View(profile);
+            var profileViewModel = new ProfileViewModel
+            {
+                Biography = profile.Biography,
+                FirstName = profile.FirstName,
+                LastName = profile.LastName,
+                ProfilePhotoPath = profile.ProfilePhotoPath,
+                ProfilePhotoThumbPath = profile.ProfilePhotoThumbPath
+            };
+
+            return View(profileViewModel);
         }
 
         [HttpGet("/Profile/{username:alpha}")]
