@@ -75,13 +75,13 @@ namespace SmallDad.Controllers
         public async Task<IActionResult> CreatePost([Bind("Title,Description,CoverImage")] RankViewModel rankViewModel)
         {
             var photoUploader = new PhotoUploader(_env);
-            var isFileUploaded = await photoUploader.Upload(rankViewModel.CoverImage, PhotoType.RankPhoto);
+            var uploadedPhoto = await photoUploader.Upload(rankViewModel.CoverImage, PhotoType.RankPhoto);
 
             var rank = new Rank
             {
                 Title = rankViewModel.Title,
                 Description = rankViewModel.Description,
-                CoverImgPath = isFileUploaded ? AppConstants.RankCoverImgPathPublic + photoUploader.ImageName : string.Empty
+                CoverImgPath = uploadedPhoto != null ? AppConstants.RankCoverImgPathPublic + uploadedPhoto.PhotoOriginalPath : string.Empty
             };
 
             await _context.Ranks.AddAsync(rank);

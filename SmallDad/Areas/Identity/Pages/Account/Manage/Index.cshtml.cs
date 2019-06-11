@@ -130,7 +130,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
 
             if (Input.Biography != user.Biography)
             {
-                await _myUserManager.UpdateBiography(Input.Biography);
+                await _myUserManager.UpdateBiographyAsync(Input.Biography);
             }
 
             if (Input.ProfilePhoto != null)
@@ -138,8 +138,8 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
                 {
                     var photoUploader = new PhotoUploader(_env);
-                    var isFileUploaded = await photoUploader.Upload(Input.ProfilePhoto, PhotoType.ProfilePhoto);
-                    user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + photoUploader.ImageName;
+                    var uploadedPhoto = await photoUploader.Upload(Input.ProfilePhoto, PhotoType.ProfilePhoto);
+                    await _myUserManager.UpdatePhotoAsync(uploadedPhoto);
                 }
             }
 

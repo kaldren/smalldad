@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using ImageMagick;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using SmallDad.Dto;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,46 +14,68 @@ namespace SmallDad.Misc
     public class PhotoUploader
     {
         private readonly IHostingEnvironment _env;
-        public string ImageName { get; set; }
+        private string _photoThumbPath = string.Empty;
+        private string _photoOriginalPath = string.Empty;
+        private string _photoOriginalName = string.Empty;
+        private string _photoThumbName = string.Empty;
+        private string _imgPath = string.Empty;
 
         public PhotoUploader(IHostingEnvironment env)
         {
             _env = env;
         }
-        public async Task<bool> Upload(IFormFile file, PhotoType photoType)
+        public async Task<PhotoUploadDto> Upload(IFormFile file, PhotoType photoType)
         {
-            bool isSuccess = false;
-            var imgPath = string.Empty;
+            string randomGuid = Guid.NewGuid().ToString();
 
             if (file == null)
             {
-                return isSuccess;
+                return null;
             }
 
             switch (photoType)
             {
                 case PhotoType.RankPhoto:
-                    imgPath = AppConstants.RankCoverImgPath;
+                    _imgPath = AppConstants.RankCoverImgPath;
                     break;
                 case PhotoType.ProfilePhoto:
-                    imgPath = AppConstants.ProfilePhotoImgPath;
+                    _imgPath = AppConstants.ProfilePhotoImgPath;
                     break;
                 default:
                     break;
             }
 
             var imageExtension = Path.GetExtension(file.FileName);
-            ImageName = Guid.NewGuid().ToString() + imageExtension;
+            _photoOriginalName = randomGuid + imageExtension;
+            _photoOriginalPath = Path.Combine(_env.ContentRootPath, _imgPath, _photoOriginalName);
 
-            var filePath = Path.Combine(_env.ContentRootPath, imgPath, ImageName);
-
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            using (var stream = new FileStream(_photoOriginalPath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
-                isSuccess = true;
             }
 
-            return isSuccess;
+            // Read from file
+            using (MagickImage image = new MagickImage(_photoOriginalPath))
+            {
+                _photoThumbName = randomGuid + "-thumb-100x100" + imageExtension;
+                _photoThumbPath = Path.Combine(_env.ContentRootPath, _imgPath, _photoThumbName);
+
+                MagickGeometry size = new MagickGeometry(100, 100);
+                // This will resize the image to a fixed size without maintaining the aspect ratio.
+                // Normally an image will be resized to fit inside the specified size.
+                size.IgnoreAspectRatio = true;
+
+                image.Resize(size);
+
+                // Save the result
+                image.Write(_photoThumbPath);
+            }
+
+            return new PhotoUploadDto
+            {
+                PhotoOriginalPath = Path.Combine(_imgPath, _photoOriginalName),
+                PhotoThumbPath = Path.Combine(_imgPath, _photoThumbName)
+            };
         }
     }
 }

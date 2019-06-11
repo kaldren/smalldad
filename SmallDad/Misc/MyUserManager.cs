@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmallDad.Data;
+using SmallDad.Dto;
 using SmallDad.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace SmallDad.Misc
             _httpContext = httpContext;
         }
 
-        public async Task<string> UpdateBiography(string biography)
+        public async Task<string> UpdateBiographyAsync(string biography)
         {
             var userPrincipal = _httpContext.HttpContext.User;
             var user = await GetUserAsync(userPrincipal);
@@ -34,6 +35,18 @@ namespace SmallDad.Misc
             await _context.SaveChangesAsync();
 
             return user.Biography;
+        }
+
+        public async Task<PhotoUploadDto> UpdatePhotoAsync(PhotoUploadDto photoDto)
+        {
+            var userPrincipal = _httpContext.HttpContext.User;
+            var user = await GetUserAsync(userPrincipal);
+            user.ProfilePhotoPath = photoDto.PhotoOriginalPath;
+            user.ProfilePhotoThumbPath = photoDto.PhotoThumbPath;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return photoDto;
         }
 
         public async Task<ApplicationUser> GetCurrentUser()
