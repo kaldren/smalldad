@@ -57,7 +57,7 @@ body {
 
 /*#region Profile Page*/
 .profile {}
-.profile--photo {
+.profile__photo {
     width: 128px;
     height: 128px;
 }
