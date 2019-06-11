@@ -60,7 +60,9 @@ namespace SmallDad.Misc
             // Read from file
             using (MagickImage image = new MagickImage(_photoOriginalPath))
             {
-                _photoThumbName = randomGuid + "-thumb-100x100" + imageExtension;
+                var photoThumbWidth = AppConstants.ProfilePhotoThumbSizeWidth.ToString();
+                var photoThumbHeight = AppConstants.ProfilePhotoThumbSizeHeight.ToString();
+                _photoThumbName = $"{randomGuid}-thumb-{photoThumbWidth}x{photoThumbHeight}{imageExtension}";
                 _photoThumbPath = Path.Combine(_env.ContentRootPath, _imgPath, _photoThumbName);
 
                 MagickGeometry size = new MagickGeometry(100, 100);

@@ -23,6 +23,9 @@ namespace SmallDad.Misc
         #region Profile Photo
         public const string ProfilePhotoImgPath = @"wwwroot\images\profiles\";
         public const string ProfilePhotoImgPathPublic = @"\images\profiles\";
+        public const string ProfilePhotoImgPathGeneric = @"\images\readonly\profile.svg";
+        public const int ProfilePhotoThumbSizeWidth = 128;
+        public const int ProfilePhotoThumbSizeHeight = 128;
         #endregion Profile Photo
 
         #region Comments
