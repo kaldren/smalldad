@@ -19,6 +19,7 @@ namespace SmallDad.Misc
         private string _photoOriginalName = string.Empty;
         private string _photoThumbName = string.Empty;
         private string _imgPath = string.Empty;
+        private string _imgPathPublic = string.Empty;
 
         public PhotoUploader(IHostingEnvironment env)
         {
@@ -37,9 +38,11 @@ namespace SmallDad.Misc
             {
                 case PhotoType.RankPhoto:
                     _imgPath = AppConstants.RankCoverImgPath;
+                    _imgPathPublic = AppConstants.RankCoverImgPathPublic;
                     break;
                 case PhotoType.ProfilePhoto:
                     _imgPath = AppConstants.ProfilePhotoImgPath;
+                    _imgPathPublic = AppConstants.ProfilePhotoImgPathPublic;
                     break;
                 default:
                     break;
@@ -66,6 +69,7 @@ namespace SmallDad.Misc
                 size.IgnoreAspectRatio = true;
 
                 image.Resize(size);
+                image.AutoOrient();
 
                 // Save the result
                 image.Write(_photoThumbPath);
@@ -73,8 +77,8 @@ namespace SmallDad.Misc
 
             return new PhotoUploadDto
             {
-                PhotoOriginalPath = Path.Combine(_imgPath, _photoOriginalName),
-                PhotoThumbPath = Path.Combine(_imgPath, _photoThumbName)
+                PhotoOriginalPath = Path.Combine(_imgPathPublic, _photoOriginalName),
+                PhotoThumbPath = Path.Combine(_imgPathPublic, _photoThumbName)
             };
         }
     }

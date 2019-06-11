@@ -49,7 +49,16 @@ namespace SmallDad.Controllers
                             .Where(x => x.UserName == username)
                             .SingleOrDefaultAsync();
 
-            return View(profile);
+            var profileViewModel = new ProfileViewModel
+            {
+                Biography = profile.Biography,
+                FirstName = profile.FirstName,
+                LastName = profile.LastName,
+                ProfilePhotoPath = profile.ProfilePhotoPath,
+                ProfilePhotoThumbPath = profile.ProfilePhotoThumbPath
+            };
+
+            return View(profileViewModel);
         }
     }
 }
