@@ -133,19 +133,22 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 await _myUserManager.UpdateBiography(Input.Biography);
             }
 
-            if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
+            if (Input.ProfilePhoto != null)
             {
-                var imageExtension = Path.GetExtension(Input.ProfilePhoto.FileName);
-                var imageName = Guid.NewGuid().ToString() + imageExtension;
-
-                var filePath = Path.Combine(_env.ContentRootPath, AppConstants.ProfilePhotoImgPath, imageName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
                 {
-                    await Input.ProfilePhoto.CopyToAsync(stream);
-                }
+                    var imageExtension = Path.GetExtension(Input.ProfilePhoto.FileName);
+                    var imageName = Guid.NewGuid().ToString() + imageExtension;
 
-                user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + imageName;
+                    var filePath = Path.Combine(_env.ContentRootPath, AppConstants.ProfilePhotoImgPath, imageName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Input.ProfilePhoto.CopyToAsync(stream);
+                    }
+
+                    user.ProfilePhotoPath = AppConstants.ProfilePhotoImgPathPublic + imageName;
+                }
             }
 
             await _signInManager.RefreshSignInAsync(user);
