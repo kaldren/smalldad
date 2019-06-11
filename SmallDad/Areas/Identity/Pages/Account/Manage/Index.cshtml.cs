@@ -41,6 +41,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
+        public string ProfilePhotoThumbPath { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
 
@@ -50,7 +51,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
-        [Bind("Email,PhoneNumber,Biography,ProfilePhoto")]
+        [Bind("Email,PhoneNumber,Biography,ProfilePhoto,ProfilePhotoThumbPath")]
         public class InputModel
         {
             [Required]
@@ -77,11 +78,16 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
             var email = await _userManager.GetEmailAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var biography = await _userManager.Users
-                            .Where(x => x.UserName == "kdrenski")
+                            .Where(x => x.UserName == userName)
                             .Select(x => x.Biography)
+                            .SingleOrDefaultAsync();
+            var profilePhoto = await _userManager.Users
+                            .Where(x => x.UserName == userName)
+                            .Select(x => x.ProfilePhotoThumbPath)
                             .SingleOrDefaultAsync();
 
             Username = userName;
+            ProfilePhotoThumbPath = profilePhoto;
 
             Input = new InputModel
             {
