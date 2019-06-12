@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallDad", "SmallDad\SmallDad.csproj", "{DC237094-D4AE-44AA-B530-2D3822082ADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmallDad", "SmallDad\SmallDad.csproj", "{DC237094-D4AE-44AA-B530-2D3822082ADD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8A8AF505-24B5-47B3-ACE7-472A2CCFA900}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{46CD0C6A-8F6D-430D-89D9-95FFA7D7AE12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{D0FA7222-53C2-4CF4-85E6-543E201D190A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{15839D13-F8E4-4E25-8842-FBEE78C02568}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +26,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46CD0C6A-8F6D-430D-89D9-95FFA7D7AE12} = {8A8AF505-24B5-47B3-ACE7-472A2CCFA900}
+		{D0FA7222-53C2-4CF4-85E6-543E201D190A} = {8A8AF505-24B5-47B3-ACE7-472A2CCFA900}
+		{15839D13-F8E4-4E25-8842-FBEE78C02568} = {8A8AF505-24B5-47B3-ACE7-472A2CCFA900}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09BF51F2-D7A5-433A-A663-56071EFBD325}
