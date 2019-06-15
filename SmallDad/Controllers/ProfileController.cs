@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SmallDad.Data;
+using SmallDad.Infrastructure.Data;
 using SmallDad.ViewModels.Profile;
 using System;
 using System.Collections.Generic;

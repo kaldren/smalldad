@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SmallDad.Data;
+using SmallDad.Infrastructure.Data;
 using SmallDad.Misc;
 using SmallDad.ViewModels.Rank;
 using SmallDad.Core.Config;

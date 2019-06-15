@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmallDad.Core\SmallDad.Core\SmallDad.Core.csproj" />
+    <ProjectReference Include="..\SmallDad.Infrastructure\SmallDad.Infrastructure\SmallDad.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmallDad.Core.Dto;
 using SmallDad.Core.Entities;
-using SmallDad.Data;
+using SmallDad.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
