@@ -24,7 +24,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Dto\" />
     <Folder Include="wwwroot\images\profiles\" />
   </ItemGroup>
 
