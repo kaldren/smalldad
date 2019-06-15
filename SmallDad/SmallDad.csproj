@@ -27,4 +27,9 @@
     <Folder Include="wwwroot\images\profiles\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\SmallDad.Core\SmallDad.Core\SmallDad.Core.csproj" />
+  </ItemGroup>
+
 </Project>
