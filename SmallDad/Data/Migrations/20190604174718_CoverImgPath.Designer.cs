@@ -186,7 +186,7 @@ namespace SmallDad.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SmallDad.Models.Rank", b =>
+            modelBuilder.Entity("SmallDad.Core.Entities.Rank", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

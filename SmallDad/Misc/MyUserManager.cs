@@ -5,11 +5,8 @@ using Microsoft.Extensions.Options;
 using SmallDad.Core.Dto;
 using SmallDad.Core.Entities;
 using SmallDad.Data;
-using SmallDad.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SmallDad.Misc

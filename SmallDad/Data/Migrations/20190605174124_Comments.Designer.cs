@@ -135,7 +135,7 @@ namespace SmallDad.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SmallDad.Models.ApplicationUser", b =>
+            modelBuilder.Entity("SmallDad.Core.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -188,7 +188,7 @@ namespace SmallDad.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SmallDad.Models.Comment", b =>
+            modelBuilder.Entity("SmallDad.Core.Entities.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,7 +205,7 @@ namespace SmallDad.Data.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("SmallDad.Models.Rank", b =>
+            modelBuilder.Entity("SmallDad.Core.Entities.Rank", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -238,7 +238,7 @@ namespace SmallDad.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SmallDad.Models.ApplicationUser")
+                    b.HasOne("SmallDad.Core.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -246,7 +246,7 @@ namespace SmallDad.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SmallDad.Models.ApplicationUser")
+                    b.HasOne("SmallDad.Core.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -259,7 +259,7 @@ namespace SmallDad.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("SmallDad.Models.ApplicationUser")
+                    b.HasOne("SmallDad.Core.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -267,15 +267,15 @@ namespace SmallDad.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SmallDad.Models.ApplicationUser")
+                    b.HasOne("SmallDad.Core.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SmallDad.Models.Comment", b =>
+            modelBuilder.Entity("SmallDad.Core.Entities.Comment", b =>
                 {
-                    b.HasOne("SmallDad.Models.ApplicationUser", "Author")
+                    b.HasOne("SmallDad.Core.Entities.ApplicationUser", "Author")
                         .WithMany("Comments")
                         .HasForeignKey("AuthorId");
                 });

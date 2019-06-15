@@ -1,6 +1,4 @@
-using System;
-
-namespace SmallDad.Models
+namespace SmallDad.ViewModels
 {
     public class ErrorViewModel
     {
