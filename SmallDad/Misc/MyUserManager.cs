@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SmallDad.Core.Dto;
 using SmallDad.Data;
-using SmallDad.Dto;
 using SmallDad.Models;
 using System;
 using System.Collections.Generic;
