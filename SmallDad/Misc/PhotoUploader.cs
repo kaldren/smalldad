@@ -1,6 +1,7 @@
 ﻿using ImageMagick;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using SmallDad.Core.Config;
 using SmallDad.Core.Dto;
 using System;
 using System.Collections.Generic;

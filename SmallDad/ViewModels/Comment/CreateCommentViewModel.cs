@@ -1,4 +1,4 @@
-﻿using SmallDad.Misc;
+﻿using SmallDad.Core.Config;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
