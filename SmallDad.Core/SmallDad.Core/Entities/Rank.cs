@@ -1,10 +1,7 @@
-﻿using SmallDad.Misc;
-using System;
+﻿using SmallDad.Core.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace SmallDad.Models
+namespace SmallDad.Core.Entities
 {
     public enum RatingTypes
     {

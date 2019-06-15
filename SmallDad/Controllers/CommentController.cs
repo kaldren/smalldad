@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using SmallDad.Data;
 using SmallDad.ViewModels.Comment;
 using SmallDad.Misc;
-using SmallDad.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using SmallDad.Core.Entities;
 
 namespace SmallDad.Controllers
 {
