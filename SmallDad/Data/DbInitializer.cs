@@ -1,4 +1,6 @@
-﻿using SmallDad.Models;
+﻿using SmallDad.Core.Entities;
+using SmallDad.Core.Enumerations.Rank;
+using SmallDad.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

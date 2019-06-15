@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmallDad.Core.Dto;
+using SmallDad.Core.Entities;
 using SmallDad.Data;
 using SmallDad.Models;
 using System;

@@ -1,16 +1,9 @@
 ﻿using SmallDad.Core.Entities;
+using SmallDad.Core.Enumerations.Rank;
 using System.Collections.Generic;
 
 namespace SmallDad.Core.Entities
 {
-    public enum RatingTypes
-    {
-        Awful,
-        Smells,
-        Normal,
-        Cool,
-        Bazooka
-    }
     public class Rank
     {
         public int Id { get; set; }

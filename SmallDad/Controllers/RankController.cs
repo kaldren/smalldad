@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmallDad.Data;
-using SmallDad.ViewModels.Comment;
 using SmallDad.Misc;
-using SmallDad.Models;
 using SmallDad.ViewModels.Rank;
 using SmallDad.Core.Config;
+using SmallDad.Core.Entities;
+using SmallDad.Core.Enumerations.Rank;
 
 namespace SmallDad.Controllers
 {

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SmallDad.Models;
+using SmallDad.Core.Entities;
 
 namespace SmallDad.Areas.Identity.Pages.Account
 {

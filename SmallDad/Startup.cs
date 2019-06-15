@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmallDad.Models;
 using SmallDad.Misc;
+using SmallDad.Core.Entities;
 
 namespace SmallDad
 {

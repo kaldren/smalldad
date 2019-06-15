@@ -15,6 +15,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using SmallDad.Core.Entities;
 
 namespace SmallDad.Areas.Identity.Pages.Account.Manage
 {
