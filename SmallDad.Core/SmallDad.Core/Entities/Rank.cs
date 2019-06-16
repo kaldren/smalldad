@@ -28,7 +28,7 @@ namespace SmallDad.Core.Entities
         private void UpdateVerbalRating()
         {
             if (Rating < AppConstants.RatingAwful) Verbal = RatingTypes.Awful;
-            else if (Rating < AppConstants.RatingSmells) Verbal = RatingTypes.Smells;
+            else if (Rating < AppConstants.RatingNormal && Rating > AppConstants.RatingSmells) Verbal = RatingTypes.Smells;
             else if (Rating > AppConstants.RatingNormal && Rating < AppConstants.RatingCool) Verbal = RatingTypes.Normal;
             else if (Rating > AppConstants.RatingCool && Rating < AppConstants.RatingBazooka) Verbal = RatingTypes.Cool;
             else if (Rating > AppConstants.RatingBazooka) Verbal = RatingTypes.Bazooka;
