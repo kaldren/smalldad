@@ -46,12 +46,6 @@ namespace SmallDad.Controllers
                 var currentVote = vote < 0 ? -1 : 1;
                 rank.Rating += currentVote;
 
-                if (rank.Rating < AppConstants.RatingAwful) rank.Verbal = RatingTypes.Awful;
-                else if (rank.Rating < AppConstants.RatingSmells) rank.Verbal = RatingTypes.Smells;
-                else if (rank.Rating > AppConstants.RatingNormal && rank.Rating < AppConstants.RatingCool) rank.Verbal = RatingTypes.Normal;
-                else if (rank.Rating > AppConstants.RatingCool && rank.Rating < AppConstants.RatingBazooka) rank.Verbal = RatingTypes.Cool;
-                else if (rank.Rating > AppConstants.RatingBazooka) rank.Verbal = RatingTypes.Bazooka;
-
                 // Increment number of votes
                 rank.NumVotes++;
 
