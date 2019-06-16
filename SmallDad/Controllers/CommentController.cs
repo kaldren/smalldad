@@ -29,7 +29,7 @@ namespace SmallDad.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentUser = await _userManager.GetCurrentUser();
+                var currentUser = await _userManager.GetCurrentUserAsync();
 
                 var commentToDb = new Comment
                 {

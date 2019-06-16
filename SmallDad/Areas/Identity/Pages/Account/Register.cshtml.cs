@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using SmallDad.Core.Config;
 using SmallDad.Core.Entities;
+using SmallDad.Misc;
 
 namespace SmallDad.Areas.Identity.Pages.Account
 {
@@ -16,6 +17,7 @@ namespace SmallDad.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly MyUserManager _myUserManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
@@ -23,11 +25,13 @@ namespace SmallDad.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            MyUserManager myUserManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _myUserManager = myUserManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -39,6 +43,10 @@ namespace SmallDad.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -66,7 +74,8 @@ namespace SmallDad.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, ProfilePhotoThumbPath = AppConstants.ProfilePhotoImgPathGeneric };
+                var user = new ApplicationUser { UserName = Input.Username, Email = Input.Email, ProfilePhotoThumbPath = AppConstants.ProfilePhotoImgPathGeneric };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

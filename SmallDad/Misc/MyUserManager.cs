@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmallDad.Core.Dto;
@@ -47,7 +48,7 @@ namespace SmallDad.Misc
             return photoDto;
         }
 
-        public async Task<ApplicationUser> GetCurrentUser()
+        public async Task<ApplicationUser> GetCurrentUserAsync()
         {
             return await GetUserAsync(_httpContext.HttpContext.User);
         }
