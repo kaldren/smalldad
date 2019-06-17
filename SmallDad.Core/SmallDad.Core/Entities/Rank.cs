@@ -1,5 +1,4 @@
 ﻿using SmallDad.Core.Config;
-using SmallDad.Core.Entities;
 using SmallDad.Core.Enumerations.Rank;
 using System.Collections.Generic;
 

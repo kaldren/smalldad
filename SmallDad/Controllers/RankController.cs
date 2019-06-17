@@ -75,6 +75,11 @@ namespace SmallDad.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreatePost([Bind("Title,Description,CoverImage")] RankViewModel rankViewModel)
         {
+            if (ModelState.IsValid == false)
+            {
+                return RedirectToAction(actionName: nameof(Create));
+            }
+
             var photoUploader = new PhotoUploader(_env);
             var uploadedPhoto = await photoUploader.Upload(rankViewModel.CoverImage, PhotoType.RankPhoto);
 

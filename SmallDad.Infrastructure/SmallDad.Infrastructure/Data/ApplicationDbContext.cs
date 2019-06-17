@@ -25,6 +25,11 @@ namespace SmallDad.Infrastructure.Data
                 .WithMany(b => b.Comments)
                 .HasForeignKey(p => p.AuthorId);
             #endregion Comment
+
+            #region Rank
+            modelBuilder.Entity<Rank>()
+                .Property(x => x.Title).IsRequired().HasMaxLength(1000);
+            #endregion Rank
         }
 
         public DbSet<Rank> Ranks { get; set; }
