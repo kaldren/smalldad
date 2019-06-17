@@ -10,6 +10,7 @@ using SmallDad.ViewModels.Rank;
 using SmallDad.Core.Config;
 using SmallDad.Core.Entities;
 using SmallDad.Core.Enumerations.Rank;
+using Microsoft.Extensions.Logging;
 
 namespace SmallDad.Controllers
 {
@@ -18,11 +19,13 @@ namespace SmallDad.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _env;
+        private readonly ILogger<RankController> _logger;
 
-        public RankController(ApplicationDbContext context, IHostingEnvironment env)
+        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger)
         {
             _context = context;
             _env = env;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -35,11 +38,18 @@ namespace SmallDad.Controllers
         [HttpGet("/Rank/{id:int}")]
         public async Task<IActionResult> GetRank(int id, int? vote)
         {
+            _logger.LogInformation($"Getting rank {id} with vote value of {vote}");
+
             var rank = await _context.Ranks
                 .Where(x => x.Id == id)
                 .Include(x => x.Comments)
                 .ThenInclude(x => x.Author)
                 .SingleOrDefaultAsync();
+
+            if (rank == null)
+            {
+                _logger.LogCritical($"Rank with id {id} does not exist!");
+            }
 
             if (vote.HasValue)
             {
