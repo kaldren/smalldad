@@ -38,7 +38,7 @@ namespace SmallDad.Controllers
         [HttpGet("/Rank/{id:int}")]
         public async Task<IActionResult> GetRank(int id, int? vote)
         {
-            _logger.LogInformation($"Getting rank {id} with vote value of {vote}");
+            _logger.LogInformation($"Getting rank {id} with vote value of {vote}.");
 
             var rank = await _context.Ranks
                 .Where(x => x.Id == id)
@@ -48,7 +48,7 @@ namespace SmallDad.Controllers
 
             if (rank == null)
             {
-                _logger.LogCritical($"Rank with id {id} does not exist!");
+                _logger.LogCritical($"Rank with id {id} does not exist.");
             }
 
             if (vote.HasValue)
