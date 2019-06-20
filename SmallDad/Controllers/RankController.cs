@@ -11,6 +11,7 @@ using SmallDad.Core.Config;
 using SmallDad.Core.Entities;
 using SmallDad.Core.Enumerations.Rank;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace SmallDad.Controllers
 {
@@ -20,12 +21,14 @@ namespace SmallDad.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _env;
         private readonly ILogger<RankController> _logger;
+        private readonly MyUserManager _userManager;
 
-        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger)
+        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger, MyUserManager userManager)
         {
             _context = context;
             _env = env;
             _logger = logger;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -53,13 +56,34 @@ namespace SmallDad.Controllers
 
             if (vote.HasValue)
             {
-                var currentVote = vote < 0 ? -1 : 1;
-                rank.Rating += currentVote;
+                // Check if user already voted for this rank
+                var loggedInUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                // Increment number of votes
-                rank.NumVotes++;
+                var hasUserVoted = await _context.Votes.SingleOrDefaultAsync(x => x.AuthorId == loggedInUserId);
 
-                _context.SaveChanges();
+                if (hasUserVoted != null)
+                {
+                    // User already voted for this rank
+                    ModelState.AddModelError("AlreadyVoted", "You already voted for this");
+                }
+                else
+                {
+                    var currentVote = vote < 0 ? -1 : 1;
+                    rank.Rating += currentVote;
+
+                    // Increment number of votes
+                    rank.NumVotes++;
+
+                    // User voted for this rank
+                    var voteDb = new Vote
+                    {
+                        AuthorId = loggedInUserId,
+                        Value = currentVote
+                    };
+                    await _context.Votes.AddAsync(voteDb);
+
+                    await _context.SaveChangesAsync();
+                }
             }
 
             return View(rank);

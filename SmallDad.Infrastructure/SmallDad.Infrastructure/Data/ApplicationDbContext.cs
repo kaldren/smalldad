@@ -34,5 +34,6 @@ namespace SmallDad.Infrastructure.Data
 
         public DbSet<Rank> Ranks { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Vote> Votes { get; set; }
     }
 }
