@@ -23,12 +23,11 @@ namespace SmallDad.Controllers
         private readonly ILogger<RankController> _logger;
         private readonly MyUserManager _userManager;
 
-        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger, MyUserManager userManager)
+        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger)
         {
             _context = context;
             _env = env;
             _logger = logger;
-            _userManager = userManager;
         }
 
         public IActionResult Index()
