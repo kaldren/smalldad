@@ -23,6 +23,11 @@ namespace SmallDad.Services.Uploads
         private string _imgPath = string.Empty;
         private string _imgPathPublic = string.Empty;
 
+        public PhotoUploader(IHostingEnvironment env)
+        {
+            _env = env as HostingEnvironment;
+        }
+
         public async Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType photoType)
         {
             string randomGuid = Guid.NewGuid().ToString();

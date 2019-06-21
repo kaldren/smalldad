@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmallDad.Core\SmallDad.Core\SmallDad.Core.csproj" />
+    <ProjectReference Include="..\SmallDad.Services\SmallDad.Services.csproj" />
   </ItemGroup>
 
 </Project>

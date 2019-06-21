@@ -12,6 +12,8 @@ using SmallDad.Misc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using SmallDad.Core.Entities;
+using SmallDad.Services.Uploads;
+using SmallDad.Core.Enumerations.Uploads;
 
 namespace SmallDad.Areas.Identity.Pages.Account.Manage
 {
@@ -141,7 +143,7 @@ namespace SmallDad.Areas.Identity.Pages.Account.Manage
                 if (Input.ProfilePhoto.Length > 0 && Input.ProfilePhoto.ContentType == "image/jpeg")
                 {
                     var photoUploader = new PhotoUploader(_env);
-                    var uploadedPhoto = await photoUploader.Upload(Input.ProfilePhoto, PhotoType.ProfilePhoto);
+                    var uploadedPhoto = await photoUploader.Upload(Input.ProfilePhoto, FileUploadType.ProfilePhoto);
                     await _myUserManager.UpdatePhotoAsync(uploadedPhoto);
                 }
             }

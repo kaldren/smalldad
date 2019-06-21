@@ -15,7 +15,6 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="7.13.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
@@ -30,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SmallDad.Core\SmallDad.Core\SmallDad.Core.csproj" />
     <ProjectReference Include="..\SmallDad.Infrastructure\SmallDad.Infrastructure.csproj" />
+    <ProjectReference Include="..\SmallDad.Services\SmallDad.Services.csproj" />
   </ItemGroup>
 
 </Project>

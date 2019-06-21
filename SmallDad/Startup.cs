@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmallDad.Misc;
 using SmallDad.Core.Entities;
+using SmallDad.Core.Interfaces.Uploads;
+using SmallDad.Services.Uploads;
 
 namespace SmallDad
 {
@@ -41,9 +43,11 @@ namespace SmallDad
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddLogging();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IPhotoUploader, PhotoUploader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
