@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using SmallDad.Services.Uploads;
 using SmallDad.Core.Enumerations.Uploads;
+using SmallDad.Core.Interfaces.Uploads;
 
 namespace SmallDad.Controllers
 {
@@ -23,12 +24,14 @@ namespace SmallDad.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IHostingEnvironment _env;
         private readonly ILogger<RankController> _logger;
+        private readonly IPhotoUploader _photoUploader;
 
-        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger)
+        public RankController(ApplicationDbContext context, IHostingEnvironment env, ILogger<RankController> logger, IPhotoUploader photoUploader)
         {
             _context = context;
             _env = env;
             _logger = logger;
+            _photoUploader = photoUploader;
         }
 
         public IActionResult Index()
@@ -104,8 +107,7 @@ namespace SmallDad.Controllers
                 return RedirectToAction(actionName: nameof(Create));
             }
 
-            var photoUploader = new PhotoUploader(_env);
-            var uploadedPhoto = await photoUploader.Upload(rankViewModel.CoverImage, FileUploadType.RankPhoto);
+            var uploadedPhoto = await _photoUploader.Upload(rankViewModel.CoverImage, FileUploadType.RankPhoto);
 
             var rank = new Rank
             {
