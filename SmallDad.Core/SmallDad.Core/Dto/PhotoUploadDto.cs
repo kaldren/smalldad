@@ -1,5 +1,4 @@
-﻿using SmallDad.Core.Abstractions.Uploads;
-using SmallDad.Core.Interfaces.Uploads;
+﻿using SmallDad.Core.Interfaces.Uploads;
 using System;
 using System.Collections.Generic;
 using System.Linq;
