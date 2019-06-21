@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SmallDad.Core.Dto;
 using SmallDad.Core.Enumerations.Uploads;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SmallDad.Core.Interfaces.Uploads
 {
-    interface IUploader
+    public interface IPhotoUploader
     {
-        bool Upload(IFormFile file, FileUploadType FileUploadType);
+        Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType FileUploadType);
     }
 }
