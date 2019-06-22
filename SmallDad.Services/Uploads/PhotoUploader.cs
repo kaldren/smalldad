@@ -20,7 +20,7 @@ namespace SmallDad.Services.Uploads
         private string _photoOriginalPath = string.Empty;
         private string _photoOriginalName = string.Empty;
         private string _photoThumbName = string.Empty;
-        private string _imgPath = string.Empty;
+        private string _imagePath = string.Empty;
         private string _imgPathPublic = string.Empty;
 
         public PhotoUploader(IHostingEnvironment env)
@@ -40,11 +40,11 @@ namespace SmallDad.Services.Uploads
             switch (fileType)
             {
                 case FileUploadType.RankPhoto:
-                    _imgPath = AppConstants.RankCoverImgPath;
+                    _imagePath = AppConstants.RankCoverImgPath;
                     _imgPathPublic = AppConstants.RankCoverImgPathPublic;
                     break;
                 case FileUploadType.ProfilePhoto:
-                    _imgPath = AppConstants.ProfilePhotoImgPath;
+                    _imagePath = AppConstants.ProfilePhotoImgPath;
                     _imgPathPublic = AppConstants.ProfilePhotoImgPathPublic;
                     break;
                 default:
@@ -53,7 +53,7 @@ namespace SmallDad.Services.Uploads
 
             var imageExtension = Path.GetExtension(file.FileName);
             _photoOriginalName = randomGuid + imageExtension;
-            _photoOriginalPath = Path.Combine(_env.ContentRootPath, _imgPath, _photoOriginalName);
+            _photoOriginalPath = Path.Combine(_env.ContentRootPath, _imagePath, _photoOriginalName);
 
             using (var stream = new FileStream(_photoOriginalPath, FileMode.Create))
             {
@@ -66,7 +66,7 @@ namespace SmallDad.Services.Uploads
                 var photoThumbWidth = AppConstants.ProfilePhotoThumbSizeWidth.ToString();
                 var photoThumbHeight = AppConstants.ProfilePhotoThumbSizeHeight.ToString();
                 _photoThumbName = $"{randomGuid}-thumb-{photoThumbWidth}x{photoThumbHeight}{imageExtension}";
-                _photoThumbPath = Path.Combine(_env.ContentRootPath, _imgPath, _photoThumbName);
+                _photoThumbPath = Path.Combine(_env.ContentRootPath, _imagePath, _photoThumbName);
 
                 MagickGeometry size = new MagickGeometry(100, 100);
                 // This will resize the image to a fixed size without maintaining the aspect ratio.
