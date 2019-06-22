@@ -21,7 +21,7 @@ namespace SmallDad.Services.Uploads
         private string _photoOriginalName = string.Empty;
         private string _photoThumbName = string.Empty;
         private string _imagePath = string.Empty;
-        private string _imgPathPublic = string.Empty;
+        private string _imagePathPublic = string.Empty;
 
         public PhotoUploader(IHostingEnvironment env)
         {
@@ -41,11 +41,11 @@ namespace SmallDad.Services.Uploads
             {
                 case FileUploadType.RankPhoto:
                     _imagePath = AppConstants.RankCoverImgPath;
-                    _imgPathPublic = AppConstants.RankCoverImgPathPublic;
+                    _imagePathPublic = AppConstants.RankCoverImgPathPublic;
                     break;
                 case FileUploadType.ProfilePhoto:
                     _imagePath = AppConstants.ProfilePhotoImgPath;
-                    _imgPathPublic = AppConstants.ProfilePhotoImgPathPublic;
+                    _imagePathPublic = AppConstants.ProfilePhotoImgPathPublic;
                     break;
                 default:
                     break;
@@ -82,8 +82,8 @@ namespace SmallDad.Services.Uploads
 
             return new PhotoUploadDto
             {
-                PhotoOriginalPath = Path.Combine(_imgPathPublic, _photoOriginalName),
-                PhotoThumbPath = Path.Combine(_imgPathPublic, _photoThumbName)
+                PhotoOriginalPath = Path.Combine(_imagePathPublic, _photoOriginalName),
+                PhotoThumbPath = Path.Combine(_imagePathPublic, _photoThumbName)
             };
         }
     }
