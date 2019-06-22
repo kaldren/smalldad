@@ -25,7 +25,7 @@ namespace SmallDad.Services.Uploads
 
         public PhotoUploader(IHostingEnvironment env)
         {
-            _env = env;
+            _env = env ?? throw new ArgumentNullException(nameof(env));
         }
 
         public async Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType fileType)
