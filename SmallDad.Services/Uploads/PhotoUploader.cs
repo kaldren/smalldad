@@ -32,7 +32,7 @@ namespace SmallDad.Services.Uploads
         {
             if (file == null)
             {
-                return null;
+                throw new ArgumentNullException(nameof(file));
             }
 
             string randomGuid = Guid.NewGuid().ToString();
