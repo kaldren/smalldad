@@ -12,14 +12,18 @@ using SmallDad.Misc;
 using SmallDad.Core.Entities;
 using SmallDad.Core.Interfaces.Uploads;
 using SmallDad.Services.Uploads;
+using Microsoft.AspNetCore.Hosting.Internal;
 
 namespace SmallDad
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostingEnvironment _env;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -47,7 +51,7 @@ namespace SmallDad
             services.AddLogging();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IPhotoUploader, PhotoUploader>();
+            services.AddSingleton<IPhotoUploader>(new PhotoUploader(_env));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

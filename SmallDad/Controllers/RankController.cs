@@ -113,7 +113,7 @@ namespace SmallDad.Controllers
             {
                 Title = rankViewModel.Title,
                 Description = rankViewModel.Description,
-                CoverImgPath = uploadedPhoto != null ? AppConstants.RankCoverImgPathPublic + uploadedPhoto.PhotoOriginalPath : string.Empty
+                CoverImgPath = uploadedPhoto != null ? uploadedPhoto.PhotoOriginalPath : string.Empty
             };
 
             await _context.Ranks.AddAsync(rank);

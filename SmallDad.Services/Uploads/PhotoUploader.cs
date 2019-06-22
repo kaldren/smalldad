@@ -15,7 +15,7 @@ namespace SmallDad.Services.Uploads
     // TODO: Use interface for DI
     public class PhotoUploader : IPhotoUploader
     {
-        private readonly HostingEnvironment _env;
+        private readonly IHostingEnvironment _env;
         private string _photoThumbPath = string.Empty;
         private string _photoOriginalPath = string.Empty;
         private string _photoOriginalName = string.Empty;
@@ -25,7 +25,7 @@ namespace SmallDad.Services.Uploads
 
         public PhotoUploader(IHostingEnvironment env)
         {
-            _env = env as HostingEnvironment;
+            _env = env;
         }
 
         public async Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType photoType)
