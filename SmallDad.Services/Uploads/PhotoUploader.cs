@@ -28,7 +28,7 @@ namespace SmallDad.Services.Uploads
             _env = env;
         }
 
-        public async Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType photoType)
+        public async Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType fileType)
         {
             string randomGuid = Guid.NewGuid().ToString();
 
@@ -37,7 +37,7 @@ namespace SmallDad.Services.Uploads
                 return null;
             }
 
-            switch (photoType)
+            switch (fileType)
             {
                 case FileUploadType.RankPhoto:
                     _imgPath = AppConstants.RankCoverImgPath;
