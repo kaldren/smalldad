@@ -51,7 +51,8 @@ namespace SmallDad.Services.Uploads
                     break;
             }
 
-            _photoOriginalName = randomGuid + Path.GetExtension(file.FileName);
+            var imageExtension = Path.GetExtension(file.FileName);
+            _photoOriginalName = randomGuid + imageExtension;
             _photoOriginalPath = Path.Combine(_env.ContentRootPath, _imagePath, _photoOriginalName);
 
             using (var stream = new FileStream(_photoOriginalPath, FileMode.Create))
