@@ -15,6 +15,7 @@ using System.Security.Claims;
 using SmallDad.Services.Uploads;
 using SmallDad.Core.Enumerations.Uploads;
 using SmallDad.Core.Interfaces.Uploads;
+using static SmallDad.Services.Uploads.PhotoUploader;
 
 namespace SmallDad.Controllers
 {
@@ -107,7 +108,7 @@ namespace SmallDad.Controllers
                 return RedirectToAction(actionName: nameof(Create));
             }
 
-            var uploadedPhoto = await _photoUploader.Upload(rankViewModel.CoverImage, FileUploadType.RankPhoto);
+            var uploadedPhoto = await _photoUploader.Upload(rankViewModel.CoverImage, new RankPhotoUploadPath());
 
             var rank = new Rank
             {

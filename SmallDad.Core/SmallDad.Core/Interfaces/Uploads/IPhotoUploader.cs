@@ -10,6 +10,6 @@ namespace SmallDad.Core.Interfaces.Uploads
 {
     public interface IPhotoUploader
     {
-        Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType FileUploadType);
+        Task<PhotoUploadDto> Upload(IFormFile file, IFilePath FilePath);
     }
 }
