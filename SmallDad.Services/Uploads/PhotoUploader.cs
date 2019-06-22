@@ -30,12 +30,13 @@ namespace SmallDad.Services.Uploads
 
         public async Task<PhotoUploadDto> Upload(IFormFile file, FileUploadType fileType)
         {
-            string randomGuid = Guid.NewGuid().ToString();
-
             if (file == null)
             {
                 return null;
             }
+
+            string randomGuid = Guid.NewGuid().ToString();
+
 
             switch (fileType)
             {
